@@ -1,0 +1,12 @@
+version: '3'
+services:
+  web:
+    build: .
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/usr/flash-poll  # This line maps the local directory to the container
+  db:
+    image: mongo
+    ports:
+      - "27017:27017"
