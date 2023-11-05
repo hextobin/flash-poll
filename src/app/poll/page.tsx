@@ -1,5 +1,3 @@
-// placeholder component
-
 const PollSubmissionForm = () => {
   return <>stuff</>;
 };
