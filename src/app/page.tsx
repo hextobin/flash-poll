@@ -1,12 +1,13 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import { useRouter } from "next/navigation";
 import { PollCreationRequestBody } from "./types/poll";
 import { v4 as uuidv4 } from "uuid";
 import { PollQuestion } from "./_Components/PollQuestion";
 import { AnswerInput } from "./_Components/AnswerInput";
 import { DurationInput } from "./_Components/DurationInput";
+import { usePollCreationForm } from "./_Components/usePollCreationForm";
 
 type Answer = {
   id: string;
@@ -15,51 +16,22 @@ type Answer = {
 
 const PollCreationForm = () => {
   const router = useRouter();
-  const [question, setQuestion] = useState<string>("");
-  const [answers, setAnswers] = useState<Answer[]>([
-    { id: uuidv4(), text: "" },
-    { id: uuidv4(), text: "" },
-  ]);
-  const [duration, setDuration] = useState<number | null>(1);
-  const [error, setError] = useState<string | null>(null);
-  const [questionCharCount, setQuestionCharCount] = useState(0);
-
-  const handleQuestionChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    const inputText = e.target.value;
-    if (inputText.length <= 250) {
-      setQuestionCharCount(inputText.length);
-      setQuestion(inputText);
-    }
-  };
-
-  const handleAnswerChange = (
-    id: string,
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    if (e.target.value.length <= 50) {
-      setAnswers(
-        answers.map((answer) =>
-          answer.id === id ? { ...answer, text: e.target.value } : answer
-        )
-      );
-    }
-  };
-
-  const addAnswer = () => {
-    setAnswers([...answers, { id: uuidv4(), text: "" }]);
-  };
-
-  const removeAnswer = (id: string) => {
-    setAnswers(answers.filter((answer) => answer.id !== id));
-  };
-
-  const handleDurationChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (parseInt(e.target.value) >= 1 && parseInt(e.target.value) <= 60) {
-      setDuration(parseInt(e.target.value, 10));
-    } else if (e.target.value === "") {
-      setDuration(null);
-    }
-  };
+  const {
+    question,
+    answers,
+    duration,
+    error,
+    questionCharCount,
+    handleQuestionChange,
+    handleAnswerChange,
+    addAnswer,
+    removeAnswer,
+    handleDurationChange,
+    setError,
+    setQuestion,
+    setAnswers,
+    setDuration,
+  } = usePollCreationForm();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -89,12 +61,13 @@ const PollCreationForm = () => {
   };
 
   const showError = (error: string) => {
+    // for the first div, we want to center all contents
     return (
-      <div className="alert alert-warning">
+      <div className="alert alert-warning mt-4 flex items-center justify-center">
         <div className="flex-1">
           <p>{error}</p>
         </div>
-        <button className="btn" onClick={() => setError(null)}>
+        <button className="btn btn-outline" onClick={() => setError(null)}>
           Dismiss
         </button>
       </div>
@@ -102,10 +75,9 @@ const PollCreationForm = () => {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100">
-      <div className="p-4 shadow-lg rounded-lg bg-white">
-        {error && showError(error)}
-        <form onSubmit={handleSubmit} className="form-control w-full max-w-xs">
+    <div className="flex justify-center">
+      <div className=" p-5 m-5 w-full md:w-2/3 lg:w-1/3 shadow-lg rounded bg-white ">
+        <form onSubmit={handleSubmit} className="form-control">
           <label className="label" htmlFor="question">
             <span className="label-text">Question:</span>
           </label>
@@ -126,7 +98,7 @@ const PollCreationForm = () => {
           <button
             type="button"
             onClick={addAnswer}
-            className="btn btn-primary mt-2"
+            className="btn w-full btn-primary mt-2"
           >
             Add Answer
           </button>
@@ -149,12 +121,13 @@ const PollCreationForm = () => {
                 ]);
                 setDuration(1);
               }}
-              className="btn btn-ghost"
+              className="btn btn-ghost btn-outline"
             >
               Clear
             </button>
           </div>
         </form>
+        {error && showError(error)}
       </div>
     </div>
   );

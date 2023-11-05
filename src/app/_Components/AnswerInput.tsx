@@ -20,7 +20,7 @@ export const AnswerInput = ({
   removeAnswer,
 }: AnswerInputProps) => (
   <div className="flex flex-wrap items-center gap-2 mt-2">
-    <div className="flex flex-col">
+    <div className="flex w-full flex-col">
       <input
         type="text"
         id={`answer-${answer.id}`}

@@ -14,7 +14,7 @@ export const PollQuestion = ({
       id="question"
       value={question}
       onChange={handleQuestionChange}
-      className="input input-bordered w-full max-w-xs"
+      className="input input-bordered w-full "
       required
     />
     <span className="text-sm mt-1">{charCount}/250</span>

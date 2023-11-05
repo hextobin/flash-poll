@@ -16,7 +16,7 @@ export const DurationInput = ({
       id="duration"
       value={duration || ""}
       onChange={handleDurationChange}
-      className="input input-bordered w-full max-w-xs"
+      className="input input-bordered w-full "
       required
     />
   </div>
