@@ -61,7 +61,6 @@ const PollCreationForm = () => {
   };
 
   const showError = (error: string) => {
-    // for the first div, we want to center all contents
     return (
       <div className="alert alert-warning mt-4 flex items-center justify-center">
         <div className="flex-1">
@@ -76,7 +75,10 @@ const PollCreationForm = () => {
 
   return (
     <div className="flex justify-center">
-      <div className=" p-5 m-5 w-full md:w-2/3 lg:w-1/3 shadow-lg rounded bg-white ">
+      <div
+        className=" p-5 mt-20 ml-5 mr-5 w-full md:w-2/3 lg:w-1/3 border 
+       border-black rounded shadow-xl  bg-white "
+      >
         <form onSubmit={handleSubmit} className="form-control">
           <label className="label" htmlFor="question">
             <span className="label-text">Question:</span>
@@ -98,7 +100,7 @@ const PollCreationForm = () => {
           <button
             type="button"
             onClick={addAnswer}
-            className="btn w-full btn-primary mt-2"
+            className="btn w-full text-white btn-primary mt-2 "
           >
             Add Answer
           </button>
@@ -108,7 +110,7 @@ const PollCreationForm = () => {
           />
 
           <div className="flex space-x-2 mt-4">
-            <button type="submit" className="btn btn-primary">
+            <button type="submit" className="btn btn-primary text-white ">
               Submit
             </button>
             <button
@@ -121,7 +123,7 @@ const PollCreationForm = () => {
                 ]);
                 setDuration(1);
               }}
-              className="btn btn-ghost btn-outline"
+              className="btn btn-ghost btn-outline "
             >
               Clear
             </button>

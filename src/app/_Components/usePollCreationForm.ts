@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 
 type Answer = {
@@ -8,10 +8,7 @@ type Answer = {
 
 export const usePollCreationForm = () => {
   const [question, setQuestion] = useState<string>("");
-  const [answers, setAnswers] = useState<Answer[]>([
-    { id: uuidv4(), text: "" },
-    { id: uuidv4(), text: "" },
-  ]);
+  const [answers, setAnswers] = useState<Answer[]>([]);
   const [duration, setDuration] = useState<number | null>(1);
   const [questionCharCount, setQuestionCharCount] = useState(0);
   const [error, setError] = useState<string | null>(null);
@@ -23,6 +20,13 @@ export const usePollCreationForm = () => {
       setQuestion(inputText);
     }
   };
+
+  useEffect(() => {
+    setAnswers([
+      { id: uuidv4(), text: "" },
+      { id: uuidv4(), text: "" },
+    ]);
+  }, []);
 
   const handleAnswerChange = (
     id: string,
