@@ -75,10 +75,7 @@ const PollCreationForm = () => {
 
   return (
     <div className="flex justify-center">
-      <div
-        className=" p-5 mt-20 ml-5 mr-5 w-full md:w-2/3 lg:w-1/3 border 
-       border-black rounded shadow-xl  bg-white "
-      >
+      <div className=" p-5 mt-20 ml-5 mr-5 w-full md:w-2/3 lg:w-1/3  shadow-xl  bg-white ">
         <form onSubmit={handleSubmit} className="form-control">
           <label className="label" htmlFor="question">
             <span className="label-text">Question:</span>

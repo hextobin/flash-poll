@@ -8,7 +8,10 @@ type Answer = {
 
 export const usePollCreationForm = () => {
   const [question, setQuestion] = useState<string>("");
-  const [answers, setAnswers] = useState<Answer[]>([]);
+  const [answers, setAnswers] = useState<Answer[]>([
+    { id: "1", text: "" },
+    { id: "2", text: "" },
+  ]);
   const [duration, setDuration] = useState<number | null>(1);
   const [questionCharCount, setQuestionCharCount] = useState(0);
   const [error, setError] = useState<string | null>(null);
