@@ -51,11 +51,9 @@ const PollCreationForm = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        // router.push(`/poll`);
-        throw new Error("Not implemented");
+        router.push(`/poll`);
       })
       .catch((err) => {
-        console.log(err);
         setError(err.message);
       });
   };
@@ -97,7 +95,7 @@ const PollCreationForm = () => {
           <button
             type="button"
             onClick={addAnswer}
-            className="btn w-full text-white btn-primary mt-2 "
+            className="btn w-full text-white  btn-info mt-2 "
           >
             Add Answer
           </button>
@@ -107,7 +105,7 @@ const PollCreationForm = () => {
           />
 
           <div className="flex space-x-2 mt-4">
-            <button type="submit" className="btn btn-primary text-white ">
+            <button type="submit" className="btn btn-accent text-white ">
               Submit
             </button>
             <button
@@ -120,7 +118,7 @@ const PollCreationForm = () => {
                 ]);
                 setDuration(1);
               }}
-              className="btn btn-ghost btn-outline "
+              className="btn btn-error btn-outline "
             >
               Clear
             </button>

@@ -18,7 +18,10 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className + " h-screen"}>
         <div className="navbar bg-base-100">
-          <a className="btn btn-ghost btn-outline normal-case text-xl" href="/">
+          <a
+            className="btn btn-ghost border-4 btn-outline normal-case font-black text-4xl"
+            href="/"
+          >
             FlashPoll
           </a>
         </div>
