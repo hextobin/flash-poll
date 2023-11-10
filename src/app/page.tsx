@@ -2,17 +2,11 @@
 
 import React from "react";
 import { useRouter } from "next/navigation";
-import { PollCreationRequestBody } from "./types/poll";
 import { v4 as uuidv4 } from "uuid";
 import { PollQuestion } from "./_Components/PollQuestion";
 import { AnswerInput } from "./_Components/AnswerInput";
 import { DurationInput } from "./_Components/DurationInput";
 import { usePollCreationForm } from "./_Components/usePollCreationForm";
-
-type Answer = {
-  id: string;
-  text: string;
-};
 
 const PollCreationForm = () => {
   const router = useRouter();
@@ -36,7 +30,7 @@ const PollCreationForm = () => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const poll: PollCreationRequestBody = {
+    const poll = {
       question,
       answers: answers.map((answer) => answer.text),
       duration: duration,
@@ -51,7 +45,7 @@ const PollCreationForm = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        router.push(`/poll`);
+        // router.push(`/poll`);
       })
       .catch((err) => {
         setError(err.message);
