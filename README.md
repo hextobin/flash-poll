@@ -1,36 +1,62 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Flash Poll
 
-## Getting Started
+Welcome to Flash Poll, the quick and easy way to create and participate in polls! This app allows users to create polls with custom questions, answers, and set durations, as well as participate in real-time voting. Designed with a focus on simplicity and user experience, Flash Poll makes gathering opinions and insights fun and effortless.
 
-First, run the development server:
+![Screenshot of Feature](readme_screenshot.png)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Demo Site 🏗️:
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+This [demo](https://flash-poll-app-2n3gt.ondigitalocean.app) is a work in progress.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Features 🚀:
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- [ ] Poll Creation API
 
-## Learn More
+  - [x] Validation
+  - [x] Link generation
+  - [x] DB create resource
+  - [x] Error logging
+  - [x] Poll link JSON response
+  - [ ] Unit tests
 
-To learn more about Next.js, take a look at the following resources:
+- [ ] Poll Creation Page:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+  - [x] Form validation using native HTML methods
+  - [x] Custom Question
+  - [x] Custom Answers
+  - [x] Add Additional Answers Fields
+  - [x] Custom Duration
+  - [x] Submit
+  - [x] Clear Form
+  - [ ] Display errors if returned from API
+  - [ ] Redirect to poll link upon poll creation
+  - [ ] Unit tests
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+- [ ] Poll Voting Page
 
-## Deploy on Vercel
+  - [ ] Display question
+  - [ ] Display answers
+  - [ ] Display vote count on answers
+  - [ ] Display remaining voting time (duration)
+  - [ ] Web Sockets?
+  - [ ] Unit tests
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- [ ] Poll Voting API
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+  - [ ] Voting request validation
+  - [ ] DB update resource
+  - [ ] Error logging
+  - [ ] Web Sockets?
+  - [ ] Unit tests
+
+## Built With 🛠
+
+- `Next.js`, `React`, `TypeScript`, `Prisma`, `yup`, `Tailwind`, `PostgreSQL`, `DigitalOcean`
+
+## Want to take a Test Drive? 🚙
+
+Clone the repo and set up an `.env` file like the one provided. Then run `npm install && npm run dev`.
+
+## Want to get in touch? 🤝
+
+My contact information is at the bottom of [this page](https://hextobin.github.io/hextobin/).
