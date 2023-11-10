@@ -42,17 +42,14 @@ async function generateUniquePollLinkID() {
     const existingPoll = await prisma.poll.findUnique({
       where: { pollLinkID },
     });
-    if (!existingPoll) break;
-    else if (numTries >= 10) {
-      throw new Error("Unable to generate poll link");
-    }
-  } while (true);
-  return pollLinkID;
+    if (!existingPoll) return pollLinkID;
+  } while (numTries < 10);
+  throw new Error("Unable to generate poll link");
 }
 
 export async function POST(req: Request) {
   try {
-    const postPollData: PostPoll = await req.json().catch((e) => {
+    const postPollData: PostPoll = await req.json().catch(() => {
       throw new Error("Unable to process data sent");
     });
     await postPollSchema.validate(postPollData);
