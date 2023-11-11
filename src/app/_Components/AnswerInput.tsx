@@ -10,7 +10,7 @@ type AnswerInputProps = {
     id: string,
     e: React.ChangeEvent<HTMLInputElement>
   ) => void;
-  removeAnswer?: (id: string) => void;
+  removeAnswer: (id: string) => void;
 };
 
 export const AnswerInput = ({
