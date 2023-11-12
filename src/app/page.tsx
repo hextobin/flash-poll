@@ -8,6 +8,7 @@ import { DurationInput } from "./_Components/DurationInput";
 import { usePollCreationForm } from "./_Components/usePollCreationForm";
 
 const PollCreationForm = () => {
+  // TODO: scrolling is not enabled on page.
   // const router = useRouter();
   const {
     question,
