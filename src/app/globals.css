@@ -2,16 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
+
+html {
 	background: linear-gradient(215deg, rgb(153, 173, 255) 0%, rgb(221, 149, 255) 70%);
-	margin: 0;
-	height: 100vh;
-	overflow: hidden;
+	background-attachment: fixed;
   }
   
+  body {
+	margin: 0;
+	min-height: 100vh; 
+  }
   
-
-
-
-  
+  .content-wrapper {
+	overflow-y: auto;
+  }
   

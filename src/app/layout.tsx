@@ -15,8 +15,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className={inter.className + " h-screen"}>
+    <html lang="en" className={inter.className}>
+      <body className="h-screen overflow-y-scroll">
         <div className="navbar bg-base-100">
           <a
             className="btn btn-ghost border-4 btn-outline normal-case font-black text-4xl"
@@ -25,8 +25,7 @@ export default function RootLayout({
             FlashPoll
           </a>
         </div>
-
-        {children}
+        <div className="content-wrapper">{children}</div>
       </body>
     </html>
   );
