@@ -82,7 +82,7 @@ const PollCreationForm = () => {
               answer={answer}
               index={index}
               handleAnswerChange={(id, e) => handleAnswerChange(id, e)}
-              removeAnswer={index >= 2 ? removeAnswer : undefined}
+              removeAnswer={index >= 2 ? removeAnswer : () => {}}
             />
           ))}
           <button
