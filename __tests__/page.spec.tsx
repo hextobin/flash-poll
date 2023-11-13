@@ -5,6 +5,16 @@ import PollCreationForm from "../src/app/page";
 
 jest.mock("../src/app/_Components/usePollCreationForm");
 
+// TODO: Consider opening a PR for vercel/next. Evaluate if calling useRouter.prefetch is necessary for dynamically generated slugs, given the generator's proximity to the useRouter call.
+
+jest.mock("next/navigation", () => ({
+  useRouter() {
+    return {
+      prefetch: () => null,
+    };
+  },
+}));
+
 describe("PollCreationForm", () => {
   let mockHandleQuestionChange: jest.Mock<any, any, any>;
   let mockHandleAnswerChange: jest.Mock<any, any, any>;

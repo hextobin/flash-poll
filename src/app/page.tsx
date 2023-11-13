@@ -6,9 +6,10 @@ import { PollQuestion } from "./_Components/PollQuestion";
 import { AnswerInput } from "./_Components/AnswerInput";
 import { DurationInput } from "./_Components/DurationInput";
 import { usePollCreationForm } from "./_Components/usePollCreationForm";
+import { useRouter } from "next/navigation";
 
 const PollCreationForm = () => {
-  // const router = useRouter();
+  const router = useRouter();
   const {
     question,
     answers,
@@ -43,8 +44,8 @@ const PollCreationForm = () => {
       body: JSON.stringify(poll),
     })
       .then((res) => res.json())
-      .then(() => {
-        // router.push(`/poll`);
+      .then((resJSON) => {
+        router.push(`/poll/${resJSON.pollLink}`);
       })
       .catch((err) => {
         setError(err.message);
