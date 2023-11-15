@@ -1,14 +1,26 @@
 "use client";
 
-const PollPage = ({ params }: { params?: { slug: string } }) => {
-  // {params?.slug}
-  const incomingResults = [{ content: "AAA", votes: 4 }];
+import { useEffect, useState } from "react";
+import pollService from "../_Services/pollService";
+
+const PollPage = () => {
+  const [pollResults, setPollResults] = useState<
+    { content: string; votes: number }[]
+  >([]);
+
+  useEffect(() => {
+    const getData = async () => {
+      const data = await pollService.fetchPollData();
+      setPollResults(data);
+    };
+    getData();
+  }, []);
 
   return (
     <div className="flex justify-center">
       <div className="p-5 mt-20 mb-20 ml-5 mr-5 w-full shadow-xl bg-white ">
         <span className="countdown flex justify-between font-mono text-9xl">
-          {incomingResults.map((obj) => {
+          {pollResults.map((obj) => {
             return (
               <span
                 className="border"
