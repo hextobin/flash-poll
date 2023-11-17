@@ -10,13 +10,12 @@ jest.mock("../../src/app/poll/_Services/pollService", () => ({
 }));
 
 describe("PollPage", () => {
-  it("renders between 2 to 4 poll choices", async () => {
+  it("renders multiple poll choices", async () => {
     render(<PollPage />);
 
     await waitFor(() => {
       const choices = screen.queryAllByTestId("poll-choice");
-      expect(choices.length).toBeGreaterThanOrEqual(2);
-      expect(choices.length).toBeLessThanOrEqual(4);
+      expect(choices.length).toEqual(3);
     });
   });
 });

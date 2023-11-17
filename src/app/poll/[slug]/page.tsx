@@ -2,17 +2,24 @@
 
 import { useEffect, useState } from "react";
 import pollService from "../_Services/pollService";
+import { useInterval } from "../../_Utils/utils";
 
 const PollPage = () => {
   const [pollResults, setPollResults] = useState<
     { content: string; votes: number }[]
   >([]);
+  let [count, setCount] = useState(0);
+
+  useInterval(() => {
+    getData();
+  }, 1000);
+
+  const getData = async () => {
+    const data = await pollService.fetchPollData();
+    setPollResults(data);
+  };
 
   useEffect(() => {
-    const getData = async () => {
-      const data = await pollService.fetchPollData();
-      setPollResults(data);
-    };
     getData();
   }, []);
 

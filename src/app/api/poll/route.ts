@@ -84,3 +84,7 @@ export async function POST(req: Request) {
     return Response.json({ success: false, ...errorResponse });
   }
 }
+
+export async function GET(req: Request) {
+  return Response.json({ content: "Hello from API", votes: 42 });
+}
