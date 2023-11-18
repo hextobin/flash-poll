@@ -1,7 +1,8 @@
-import React, { Answer } from "react";
+import React from "react";
 import { render, fireEvent, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import PollCreationForm from "../pages";
+import { Answer } from "../types/pollTypes";
 
 jest.mock("../hooks/usePollCreationForm");
 
