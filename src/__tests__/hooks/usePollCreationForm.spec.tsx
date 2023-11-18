@@ -1,5 +1,5 @@
 import { renderHook, act } from "@testing-library/react";
-import { usePollCreationForm } from "../../src/app/_Components/usePollCreationForm";
+import { usePollCreationForm } from "../../hooks/usePollCreationForm";
 
 describe("usePollCreationForm", () => {
   it("initial states are set correctly", () => {

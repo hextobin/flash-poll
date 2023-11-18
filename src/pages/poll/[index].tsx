@@ -1,14 +1,13 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import pollService from "../_Services/pollService";
-import { useInterval } from "../../_Utils/utils";
+import pollService from "../../services/pollService";
+import { useInterval } from "../../utils/utils";
 
 const PollPage = () => {
   const [pollResults, setPollResults] = useState<
     { content: string; votes: number }[]
   >([]);
-  let [count, setCount] = useState(0);
 
   useInterval(() => {
     getData();

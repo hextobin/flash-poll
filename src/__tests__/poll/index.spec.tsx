@@ -1,7 +1,7 @@
 import { render, screen, waitFor } from "@testing-library/react";
-import PollPage from "../../src/app/poll/[slug]/page";
+import PollPage from "../../pages/poll/[index]";
 
-jest.mock("../../src/app/poll/_Services/pollService", () => ({
+jest.mock("../../services/pollService", () => ({
   fetchPollData: jest.fn().mockResolvedValue([
     { content: "AAA", votes: 4 },
     { content: "BBB", votes: 1 },

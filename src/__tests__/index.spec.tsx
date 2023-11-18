@@ -1,9 +1,9 @@
-import React from "react";
+import React, { Answer } from "react";
 import { render, fireEvent, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import PollCreationForm from "../src/app/page";
+import PollCreationForm from "../pages";
 
-jest.mock("../src/app/_Components/usePollCreationForm");
+jest.mock("../hooks/usePollCreationForm");
 
 // TODO: Consider opening a PR for vercel/next. Evaluate if calling useRouter.prefetch is necessary for dynamically generated slugs, given the generator's proximity to the useRouter call.
 
@@ -16,15 +16,24 @@ jest.mock("next/navigation", () => ({
 }));
 
 describe("PollCreationForm", () => {
-  let mockHandleQuestionChange: jest.Mock<any, any, any>;
-  let mockHandleAnswerChange: jest.Mock<any, any, any>;
-  let mockHandleDurationChange: jest.Mock<any, any, any>;
-  let mockAddAnswer: jest.Mock<any, any, any>;
-  let mockRemoveAnswer: jest.Mock<any, any, any>;
-  let mockSetError: jest.Mock<any, any, any>;
-  let mockSetAnswers: jest.Mock<any, any, any>;
-  let mockSetQuestion: jest.Mock<any, any, any>;
-  let mockSetDuration: jest.Mock<any, any, any>;
+  let mockHandleQuestionChange: jest.Mock<
+    void,
+    [React.ChangeEvent<HTMLTextAreaElement>]
+  >;
+  let mockHandleAnswerChange: jest.Mock<
+    void,
+    [string, React.ChangeEvent<HTMLInputElement>]
+  >;
+  let mockHandleDurationChange: jest.Mock<
+    void,
+    [React.ChangeEvent<HTMLInputElement>]
+  >;
+  let mockAddAnswer: jest.Mock<void, []>;
+  let mockRemoveAnswer: jest.Mock<void, [string]>;
+  let mockSetError: jest.Mock<void, [string | null]>;
+  let mockSetAnswers: jest.Mock<void, [Answer[]]>;
+  let mockSetQuestion: jest.Mock<void, [string]>;
+  let mockSetDuration: jest.Mock<void, [number | null]>;
 
   beforeEach(() => {
     mockHandleQuestionChange = jest.fn();
@@ -37,9 +46,8 @@ describe("PollCreationForm", () => {
     mockSetQuestion = jest.fn();
     mockSetDuration = jest.fn();
 
-    const {
-      usePollCreationForm,
-    } = require("../src/app/_Components/usePollCreationForm");
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
+    const { usePollCreationForm } = require("../hooks/usePollCreationForm");
     usePollCreationForm.mockReturnValue({
       question: "",
       answers: [
@@ -104,9 +112,8 @@ describe("PollCreationForm", () => {
   });
 
   it("displays and dismisses error messages", () => {
-    const {
-      usePollCreationForm,
-    } = require("../src/app/_Components/usePollCreationForm");
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
+    const { usePollCreationForm } = require("../hooks/usePollCreationForm");
     usePollCreationForm.mockReturnValue({
       ...usePollCreationForm(),
       error: "Test Error",

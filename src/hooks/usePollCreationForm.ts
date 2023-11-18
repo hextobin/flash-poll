@@ -1,10 +1,5 @@
-import { useEffect, useState } from "react";
+import { Answer, useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
-
-type Answer = {
-  id: string;
-  text: string;
-};
 
 export const usePollCreationForm = () => {
   const [question, setQuestion] = useState<string>("");

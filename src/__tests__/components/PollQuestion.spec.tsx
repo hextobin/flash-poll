@@ -1,7 +1,7 @@
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import { PollQuestion } from "../../src/app/_Components/PollQuestion";
+import { PollQuestion } from "../../components/PollQuestion";
 
 describe("PollQuestion", () => {
   const mockHandleQuestionChange = jest.fn();

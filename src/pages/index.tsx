@@ -1,11 +1,9 @@
-"use client";
-
 import React from "react";
 import { v4 as uuidv4 } from "uuid";
-import { PollQuestion } from "./_Components/PollQuestion";
-import { AnswerInput } from "./_Components/AnswerInput";
-import { DurationInput } from "./_Components/DurationInput";
-import { usePollCreationForm } from "./_Components/usePollCreationForm";
+import { PollQuestion } from "../components/PollQuestion";
+import { AnswerInput } from "../components/AnswerInput";
+import { DurationInput } from "../components/DurationInput";
+import { usePollCreationForm } from "../hooks/usePollCreationForm";
 import { useRouter } from "next/navigation";
 
 const PollCreationForm = () => {

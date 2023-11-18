@@ -1,6 +1,7 @@
 import * as yup from "yup";
 import { v4 as uuidv4 } from "uuid";
 import { PrismaClient } from "@prisma/client";
+import type { NextApiRequest, NextApiResponse } from "next";
 
 const prisma = new PrismaClient();
 
@@ -47,11 +48,9 @@ async function generateUniquePollLinkID() {
   throw new Error("Unable to generate poll link");
 }
 
-export async function POST(req: Request) {
+async function POST(req: NextApiRequest, res: NextApiResponse) {
   try {
-    const postPollData: PostPoll = await req.json().catch(() => {
-      throw new Error("Unable to process data sent");
-    });
+    const postPollData: PostPoll = await req.body;
     await postPollSchema.validate(postPollData);
     const pollLinkID = await generateUniquePollLinkID();
     const data: CreatePollData = {
@@ -70,7 +69,7 @@ export async function POST(req: Request) {
         },
       },
     });
-    return Response.json({ pollLink: pollLinkID });
+    return res.json({ pollLink: pollLinkID });
   } catch (error) {
     console.error(error);
     let errorResponse;
@@ -81,10 +80,23 @@ export async function POST(req: Request) {
     } else {
       errorResponse = { error: "An unknown error occurred" };
     }
-    return Response.json({ success: false, ...errorResponse });
+    return res.json({ success: false, ...errorResponse });
   }
 }
 
-export async function GET(req: Request) {
-  return Response.json({ content: "Hello from API", votes: 42 });
+export async function GET(req: NextApiRequest, res: NextApiResponse) {
+  return res.json({ content: "Hello from API", votes: 42 });
+}
+
+// pages/api/someEndpoint.js
+
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
+  if (req.method === "POST") {
+    POST(req, res);
+  } else {
+    // Handle other HTTP methods or return an error
+  }
 }
