@@ -1,7 +1,7 @@
 import React from "react";
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import { AnswerInput } from "../../components/AnswerInput";
+import { AnswerInput } from "../../components/pollCreation/AnswerInput";
 
 describe("AnswerInput Component", () => {
   test("renders input field and handles change", () => {

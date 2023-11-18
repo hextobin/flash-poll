@@ -1,8 +1,8 @@
 import React from "react";
 import { v4 as uuidv4 } from "uuid";
-import { PollQuestion } from "../components/PollQuestion";
-import { AnswerInput } from "../components/AnswerInput";
-import { DurationInput } from "../components/DurationInput";
+import { PollQuestion } from "../components/pollCreation/PollQuestion";
+import { AnswerInput } from "../components/pollCreation/AnswerInput";
+import { DurationInput } from "../components/pollCreation/DurationInput";
 import { usePollCreationForm } from "../hooks/usePollCreationForm";
 import { useRouter } from "next/navigation";
 

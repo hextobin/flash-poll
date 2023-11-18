@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import pollService from "../../services/pollService";
-import { useInterval } from "../../utils/utils";
+import useInterval from "../../hooks/useInterval";
 
 const PollPage = () => {
   const [pollResults, setPollResults] = useState<
@@ -14,7 +14,7 @@ const PollPage = () => {
   }, 1000);
 
   const getData = async () => {
-    const data = await pollService.fetchPollData();
+    const data = await pollService.getPoll();
     setPollResults(data);
   };
 

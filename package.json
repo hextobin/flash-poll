@@ -10,7 +10,8 @@
     "build": "prisma generate && next build",
     "start": "next start",
     "lint": "next lint ; npx tsc --noEmit",
-    "test": "npx jest"
+    "test": "npx jest",
+    "lint-test": "npm run lint && npm run test"
   },
   "dependencies": {
     "@prisma/client": "^5.5.2",

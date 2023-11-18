@@ -1,7 +1,7 @@
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import { DurationInput } from "../../components/DurationInput";
+import { DurationInput } from "../../components/pollCreation/DurationInput";
 
 describe("DurationInput", () => {
   const mockHandleDurationChange = jest.fn();
