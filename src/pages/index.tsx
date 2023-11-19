@@ -4,10 +4,10 @@ import { PollQuestion } from "../components/pollCreation/PollQuestion";
 import { AnswerInput } from "../components/pollCreation/AnswerInput";
 import { DurationInput } from "../components/pollCreation/DurationInput";
 import { usePollCreationForm } from "../hooks/usePollCreationForm";
-import { useRouter } from "next/navigation";
+import ErrorDisplay from "../components/pollCreation/ErrorDisplay";
+import pollService from "@/services/pollService";
 
 const PollCreationForm = () => {
-  const router = useRouter();
   const {
     question,
     answers,
@@ -25,7 +25,7 @@ const PollCreationForm = () => {
     setDuration,
   } = usePollCreationForm();
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const poll = {
@@ -34,33 +34,11 @@ const PollCreationForm = () => {
       duration: duration,
     };
 
-    fetch("/api/poll", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(poll),
-    })
-      .then((res) => res.json())
-      .then((resJSON) => {
-        router.push(`/poll/${resJSON.pollLink}`);
-      })
-      .catch((err) => {
-        setError(err.message);
-      });
+    await pollService.postPoll(poll, setError);
   };
 
-  const showError = (error: string) => {
-    return (
-      <div className="alert alert-warning mt-4 flex items-center justify-center">
-        <div className="flex-1">
-          <p>{error}</p>
-        </div>
-        <button className="btn btn-outline" onClick={() => setError(null)}>
-          Dismiss
-        </button>
-      </div>
-    );
+  const clearError = () => {
+    setError(null);
   };
 
   return (
@@ -116,7 +94,7 @@ const PollCreationForm = () => {
             </button>
           </div>
         </form>
-        {error && showError(error)}
+        {error && <ErrorDisplay error={error!} clearError={clearError} />}
       </div>
     </div>
   );
