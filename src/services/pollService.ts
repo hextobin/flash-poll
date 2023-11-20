@@ -6,34 +6,33 @@ import pollRepository from "../db/pollRepository";
 import router from "next/router";
 
 const pollService = {
-  getPoll: async (): Promise<{ content: string; votes: number }[]> => {
-    // try {
-    //   const response = await fetch("/api/poll", {
-    //     method: "GET",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //     body: JSON.stringify(poll),
-    //   });
-
-    //   if (!response.ok) {
-    //     throw new Error("Failed to get poll results");
-    //   }
-
-    //   const resJSON = await response.json();
-    // } catch (err) {
-    //   if (err instanceof Error) {
-    //     console.error(err);
-    //     setError(err.message);
-    //   } else {
-    //     console.error("An unknown error occurred");
-    //     setError("An unknown error occurred");
-    //   }
-    // }
-
-    return Promise.resolve([{ content: "Hello World", votes: 5 }]);
+  getPoll: async (
+    linkID: string,
+    setError: React.Dispatch<React.SetStateAction<string | null>>
+  ) => {
+    try {
+      const url = new URL("/api/poll", window.location.origin);
+      url.searchParams.append("linkID", linkID);
+      const response = await fetch(url.toString());
+      if (!response.ok) {
+        throw new Error("Failed to fetch poll");
+      }
+      const resJSON = await response.json();
+      return resJSON;
+    } catch (err) {
+      if (err instanceof Error) {
+        console.error(err);
+        setError(err.message);
+      } else {
+        console.error("An unknown error occurred");
+        setError("An unknown error occurred");
+      }
+      return [];
+    }
   },
-  GET: async () => {},
+  GET: async (req: NextApiRequest, res: NextApiResponse) => {
+    return res.json([{ content: "", votes: 5 }]);
+  },
   postPoll: async (
     poll: {
       question: string;

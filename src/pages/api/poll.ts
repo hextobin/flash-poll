@@ -7,7 +7,7 @@ export default async function handler(
 ) {
   if (req.method === "POST") {
     pollService.POST(req, res);
-  } else {
-    // Handle other HTTP methods or return an error
+  } else if (req.method === "GET") {
+    pollService.GET(req, res);
   }
 }

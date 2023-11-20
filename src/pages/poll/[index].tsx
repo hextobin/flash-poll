@@ -3,24 +3,32 @@
 import { useEffect, useState } from "react";
 import pollService from "../../services/pollService";
 import useInterval from "../../hooks/useInterval";
+import { useRouter } from "next/router";
+import { usePoll } from "../../hooks/usePoll";
 
 const PollPage = () => {
   const [pollResults, setPollResults] = useState<
     { content: string; votes: number }[]
   >([]);
+  const router = useRouter();
+  const { error, setError, clearError } = usePoll();
+  const linkID = router.query.index;
 
-  useInterval(() => {
-    getData();
-  }, 1000);
+  // useInterval(() => {
+  //   getData();
+  // }, 1000);
 
   const getData = async () => {
-    const data = await pollService.getPoll();
-    setPollResults(data);
+    if (typeof linkID === "string") {
+      const data = await pollService.getPoll(linkID, setError);
+      // TODO: Need to handle when data returned is []
+      setPollResults(data);
+    }
   };
 
   useEffect(() => {
     getData();
-  }, []);
+  }, [linkID]);
 
   return (
     <div className="flex justify-center">

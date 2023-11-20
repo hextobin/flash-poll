@@ -9,6 +9,14 @@ jest.mock("../../services/pollService", () => ({
   ]),
 }));
 
+jest.mock("next/router", () => ({
+  useRouter: jest.fn().mockReturnValue({
+    query: {
+      index: "123",
+    },
+  }),
+}));
+
 describe("PollPage", () => {
   it("renders multiple poll choices", async () => {
     render(<PollPage />);
