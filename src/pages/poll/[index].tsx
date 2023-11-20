@@ -5,6 +5,7 @@ import pollService from "../../services/pollService";
 import useInterval from "../../hooks/useInterval";
 import { useRouter } from "next/router";
 import { usePoll } from "../../hooks/usePoll";
+import { CompletePoll } from "../../types/pollTypes";
 
 const PollPage = () => {
   const [pollResults, setPollResults] = useState<
@@ -14,15 +15,25 @@ const PollPage = () => {
   const { error, setError, clearError } = usePoll();
   const linkID = router.query.index;
 
+  // TODO: show errors
+
   // useInterval(() => {
   //   getData();
   // }, 1000);
 
+  const parseAndSetPollData = (data: CompletePoll) => {
+    const answersAndVotes = data.options.map((option) => {
+      return { content: option.answer, votes: option.votes };
+    });
+    setPollResults(answersAndVotes);
+  };
+
   const getData = async () => {
     if (typeof linkID === "string") {
       const data = await pollService.getPoll(linkID, setError);
-      // TODO: Need to handle when data returned is []
-      setPollResults(data);
+      if (data) {
+        parseAndSetPollData(data);
+      }
     }
   };
 

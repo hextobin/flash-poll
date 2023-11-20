@@ -4,12 +4,13 @@ import { postPollSchema } from "../validations/pollValidationSchemas";
 import { PostPoll, CreatePollData } from "../types/pollTypes";
 import pollRepository from "../db/pollRepository";
 import router from "next/router";
+import { CompletePoll } from "../types/pollTypes";
 
 const pollService = {
   getPoll: async (
     linkID: string,
     setError: React.Dispatch<React.SetStateAction<string | null>>
-  ) => {
+  ): Promise<CompletePoll | null> => {
     try {
       const url = new URL("/api/poll", window.location.origin);
       url.searchParams.append("linkID", linkID);
@@ -27,11 +28,24 @@ const pollService = {
         console.error("An unknown error occurred");
         setError("An unknown error occurred");
       }
-      return [];
+      return null;
     }
   },
   GET: async (req: NextApiRequest, res: NextApiResponse) => {
-    return res.json([{ content: "", votes: 5 }]);
+    try {
+      const linkID = req.query.linkID as string;
+      const poll = await pollRepository.readPoll(linkID);
+      return res.json(poll);
+    } catch (error) {
+      console.error(error);
+      let errorResponse;
+      if (error instanceof Error) {
+        errorResponse = { error: error.message };
+      } else {
+        errorResponse = { error: "An unknown error occurred" };
+      }
+      return res.json({ success: false, ...errorResponse });
+    }
   },
   postPoll: async (
     poll: {

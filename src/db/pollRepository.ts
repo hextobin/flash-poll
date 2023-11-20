@@ -19,6 +19,14 @@ const pollRepository = {
       },
     });
   },
+  readPoll: async (linkID: string) => {
+    const poll = await prisma.poll.findUnique({
+      where: { pollLinkID: linkID },
+      include: { options: true },
+    });
+    if (!poll) throw new Error("Poll not found");
+    return poll;
+  },
   generateUniquePollLinkID: async () => {
     let pollLinkID;
     let numTries = 0;
