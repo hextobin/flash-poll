@@ -10,6 +10,7 @@ const PollPage = () => {
   const [pollResults, setPollResults] = useState<
     { content: string; votes: number }[]
   >([]);
+  const [pollData, setPollData] = useState<CompletePoll | null>(null);
   const router = useRouter();
   const { setError } = usePoll();
   const linkID = router.query.index;
@@ -25,6 +26,7 @@ const PollPage = () => {
       return { content: option.answer, votes: option.votes };
     });
     setPollResults(answersAndVotes);
+    setPollData(data);
   };
 
   const getData = async () => {
@@ -41,8 +43,11 @@ const PollPage = () => {
   }, [linkID]);
 
   return (
-    <div className="flex justify-center">
-      <div className="p-5 mt-20 mb-20 ml-5 mr-5 w-full shadow-xl bg-white flex justify-between ">
+    <>
+      <div className="m-5 w-auto alert" data-testid="question">
+        <span>{pollData?.question}</span>
+      </div>
+      <div className="p-5 mt-20 mb-20 ml-5 mr-5 shadow-xl bg-white flex justify-around ">
         {pollResults.map((obj) => {
           return (
             <div className="flex flex-col items-center" key={obj.content}>
@@ -62,7 +67,7 @@ const PollPage = () => {
           );
         })}
       </div>
-    </div>
+    </>
   );
 };
 

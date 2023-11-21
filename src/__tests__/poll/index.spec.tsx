@@ -47,6 +47,14 @@ jest.mock("next/router", () => ({
 }));
 
 describe("PollPage", () => {
+  it("renders question", async () => {
+    render(<PollPage />);
+    await waitFor(() => {
+      const choices = screen.queryByTestId("question");
+      expect(choices).toHaveTextContent("sdfds");
+    });
+  });
+
   it("renders multiple poll vote counts", async () => {
     render(<PollPage />);
     await waitFor(() => {

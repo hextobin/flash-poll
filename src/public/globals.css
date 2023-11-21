@@ -13,7 +13,4 @@ html {
 	min-height: 100vh; 
   }
   
-  .content-wrapper {
-	overflow-y: auto;
-  }
   

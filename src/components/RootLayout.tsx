@@ -13,7 +13,7 @@ export default function RootLayout({
           FlashPoll
         </a>
       </div>
-      <div className="content-wrapper">{children}</div>
+      {children}
     </>
   );
 }
