@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import pollService from "../../services/pollService";
-import useInterval from "../../hooks/useInterval";
 import { useRouter } from "next/router";
 import { usePoll } from "../../hooks/usePoll";
 import { CompletePoll } from "../../types/pollTypes";
@@ -12,7 +11,7 @@ const PollPage = () => {
     { content: string; votes: number }[]
   >([]);
   const router = useRouter();
-  const { error, setError, clearError } = usePoll();
+  const { setError } = usePoll();
   const linkID = router.query.index;
 
   // TODO: show errors

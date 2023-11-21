@@ -1,6 +1,6 @@
 import type { InferType } from "yup";
 import { postPollSchema } from "../validations/pollValidationSchemas";
-import { Prisma, Poll, Option } from "@prisma/client";
+import { Poll, Option } from "@prisma/client";
 
 export interface PostPoll extends InferType<typeof postPollSchema> {}
 export interface CreatePollData extends PostPoll {
