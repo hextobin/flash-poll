@@ -43,19 +43,25 @@ const PollPage = () => {
 
   return (
     <div className="flex justify-center">
-      <div className="p-5 mt-20 mb-20 ml-5 mr-5 w-full shadow-xl bg-white ">
-        <span className="countdown flex justify-between font-mono text-9xl">
-          {pollResults.map((obj) => {
-            return (
-              <span
-                className="border"
-                data-testid="poll-choice"
-                style={{ "--value": obj.votes }}
-                key={obj.content}
-              ></span>
-            );
-          })}
-        </span>
+      <div className="p-5 mt-20 mb-20 ml-5 mr-5 w-full shadow-xl bg-white flex justify-between ">
+        {pollResults.map((obj) => {
+          return (
+            <div className="flex flex-col items-center" key={obj.content}>
+              <span className="countdown font-mono text-9xl">
+                <span
+                  className="border"
+                  data-testid="poll-vote-count"
+                  style={{ "--value": obj.votes }}
+                ></span>
+              </span>
+              <div className="alert mt-4 flex items-center justify-center border-black">
+                <span className="font-bold" data-testid="poll-answer">
+                  {obj.content}
+                </span>
+              </div>
+            </div>
+          );
+        })}
       </div>
     </div>
   );

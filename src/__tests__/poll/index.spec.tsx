@@ -21,7 +21,7 @@ jest.mock("../../services/pollService", () => ({
       {
         id: 73,
         answer: "bar",
-        votes: 0,
+        votes: 1,
         pollId: 36,
         createdAt: "2023-11-20T20:41:07.628Z",
         updatedAt: "2023-11-20T20:41:07.628Z",
@@ -29,7 +29,7 @@ jest.mock("../../services/pollService", () => ({
       {
         id: 74,
         answer: "baz",
-        votes: 0,
+        votes: 2,
         pollId: 36,
         createdAt: "2023-11-20T20:41:07.628Z",
         updatedAt: "2023-11-20T20:41:07.628Z",
@@ -47,12 +47,39 @@ jest.mock("next/router", () => ({
 }));
 
 describe("PollPage", () => {
-  it("renders multiple poll choices", async () => {
+  it("renders multiple poll vote counts", async () => {
     render(<PollPage />);
-
     await waitFor(() => {
-      const choices = screen.queryAllByTestId("poll-choice");
+      const choices = screen.queryAllByTestId("poll-vote-count");
       expect(choices.length).toEqual(3);
+    });
+  });
+
+  it("renders correct poll vote counts", async () => {
+    render(<PollPage />);
+    await waitFor(() => {
+      const choices = screen.queryAllByTestId("poll-vote-count");
+      expect(choices[0]).toHaveStyle("--value: 0;");
+      expect(choices[1]).toHaveStyle("--value: 1;");
+      expect(choices[2]).toHaveStyle("--value: 2;");
+    });
+  });
+
+  it("renders multiple poll answers", async () => {
+    render(<PollPage />);
+    await waitFor(() => {
+      const choices = screen.queryAllByTestId("poll-answer");
+      expect(choices.length).toEqual(3);
+    });
+  });
+
+  it("renders correct poll answers", async () => {
+    render(<PollPage />);
+    await waitFor(() => {
+      const choices = screen.queryAllByTestId("poll-answer");
+      expect(choices[0]).toHaveTextContent("foo");
+      expect(choices[1]).toHaveTextContent("bar");
+      expect(choices[2]).toHaveTextContent("baz");
     });
   });
 });
