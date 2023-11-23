@@ -31,7 +31,10 @@ const PollPage = () => {
 
   const getData = async () => {
     if (typeof linkID === "string") {
-      const data = await pollService.getPoll(linkID, setError);
+      const data: CompletePoll | null = await pollService.getPoll(
+        linkID,
+        setError
+      );
       if (data) {
         parseAndSetPollData(data);
       }

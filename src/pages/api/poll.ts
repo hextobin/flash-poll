@@ -6,8 +6,8 @@ export default async function handler(
   res: NextApiResponse
 ) {
   if (req.method === "POST") {
-    pollService.POST(req, res);
+    await pollService.POST(req, res);
   } else if (req.method === "GET") {
-    pollService.GET(req, res);
+    await pollService.GET(req, res);
   }
 }
