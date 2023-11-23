@@ -25,6 +25,26 @@ const pollRepository = {
     if (!poll) throw new Error("Poll not found");
     return poll;
   },
+  updatePoll: async (linkID: string, voteTarget: string) => {
+    const poll = await prisma.poll.findUnique({
+      where: { pollLinkID: linkID },
+      include: { options: true },
+    });
+    if (!poll) throw new Error("Poll not found");
+    const option = poll.options.find((option) => option.answer === voteTarget);
+    if (!option) throw new Error("Option not found");
+    await prisma.poll.update({
+      where: { pollLinkID: linkID },
+      data: {
+        options: {
+          update: {
+            where: { id: option.id },
+            data: { votes: { increment: 1 } },
+          },
+        },
+      },
+    });
+  },
   generateUniquePollLinkID: async () => {
     let pollLinkID;
     let numTries = 0;

@@ -9,5 +9,7 @@ export default async function handler(
     await pollService.POST(req, res);
   } else if (req.method === "GET") {
     await pollService.GET(req, res);
+  } else if (req.method === "PUT") {
+    await pollService.PUT(req, res);
   }
 }

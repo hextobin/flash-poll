@@ -12,7 +12,7 @@ jest.mock("../../services/pollService", () => ({
     options: [
       {
         id: 72,
-        answer: "foo",
+        answer: "bar",
         votes: 0,
         pollId: 36,
         createdAt: "2023-11-20T20:41:07.628Z",
@@ -20,7 +20,7 @@ jest.mock("../../services/pollService", () => ({
       },
       {
         id: 73,
-        answer: "bar",
+        answer: "baz",
         votes: 1,
         pollId: 36,
         createdAt: "2023-11-20T20:41:07.628Z",
@@ -28,7 +28,7 @@ jest.mock("../../services/pollService", () => ({
       },
       {
         id: 74,
-        answer: "baz",
+        answer: "foo",
         votes: 2,
         pollId: 36,
         createdAt: "2023-11-20T20:41:07.628Z",
@@ -85,9 +85,9 @@ describe("PollPage", () => {
     render(<PollPage />);
     await waitFor(() => {
       const choices = screen.queryAllByTestId("poll-answer");
-      expect(choices[0]).toHaveTextContent("foo");
-      expect(choices[1]).toHaveTextContent("bar");
-      expect(choices[2]).toHaveTextContent("baz");
+      expect(choices[0]).toHaveTextContent("bar");
+      expect(choices[1]).toHaveTextContent("baz");
+      expect(choices[2]).toHaveTextContent("foo");
     });
   });
 });

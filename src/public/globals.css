@@ -8,9 +8,14 @@ html {
 	background-attachment: fixed;
   }
   
-  body {
+body {
 	margin: 0;
 	min-height: 100vh; 
   }
+
+.question-alert {
+	background-color: #54ac98;
+	border-style: none;
+}
   
   

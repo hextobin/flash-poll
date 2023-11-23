@@ -17,19 +17,27 @@ const PollPage = () => {
 
   // TODO: show errors
 
-  // useInterval(() => {
-  //   getData();
-  // }, 1000);
-
   const parseAndSetPollData = (data: CompletePoll) => {
     const answersAndVotes = data.options.map((option) => {
       return { content: option.answer, votes: option.votes };
+    });
+    answersAndVotes.sort((a, b) => {
+      const nameA = a.content.toUpperCase();
+      const nameB = b.content.toUpperCase();
+      if (nameA < nameB) {
+        return -1;
+      }
+      if (nameA > nameB) {
+        return 1;
+      }
+      // names must be equal
+      return 0;
     });
     setPollResults(answersAndVotes);
     setPollData(data);
   };
 
-  const getData = async () => {
+  const getPoll = async () => {
     if (typeof linkID === "string") {
       const data: CompletePoll | null = await pollService.getPoll(
         linkID,
@@ -41,14 +49,23 @@ const PollPage = () => {
     }
   };
 
+  const putPoll = async (voteTarget: string) => {
+    if (typeof linkID === "string") {
+      await pollService.putPoll(linkID, voteTarget, setError);
+    }
+  };
+
   useEffect(() => {
-    getData();
+    getPoll();
   }, [linkID]);
 
   return (
     <>
-      <div className="m-5 w-auto alert" data-testid="question">
-        <span>{pollData?.question}</span>
+      <div
+        className="m-auto mt-5 flex w-fit alert question-alert"
+        data-testid="question"
+      >
+        <span className="text-white text-2xl m-auto">{pollData?.question}</span>
       </div>
       <div className="p-5 mt-20 mb-20 ml-5 mr-5 shadow-xl bg-white flex justify-around ">
         {pollResults.map((obj) => {
@@ -61,7 +78,10 @@ const PollPage = () => {
                   style={{ "--value": obj.votes }}
                 ></span>
               </span>
-              <div className="alert mt-4 flex items-center justify-center border-black">
+              <div
+                className="alert mt-4 flex items-center justify-center border-black cursor-pointer"
+                onClick={() => putPoll(obj.content)}
+              >
                 <span className="font-bold" data-testid="poll-answer">
                   {obj.content}
                 </span>

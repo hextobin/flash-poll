@@ -104,6 +104,50 @@ const pollService = {
       return res.json({ success: false, ...errorResponse });
     }
   },
+  putPoll: async (
+    linkID: string,
+    voteTarget: string,
+    setError: React.Dispatch<React.SetStateAction<string | null>>
+  ) => {
+    try {
+      const response = await fetch("/api/poll", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ linkID, voteTarget }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to submit vote");
+      }
+      router.reload();
+    } catch (err) {
+      if (err instanceof Error) {
+        console.error(err);
+        setError(err.message);
+      } else {
+        console.error("An unknown error occurred");
+        setError("An unknown error occurred");
+      }
+    }
+  },
+  PUT: async (req: NextApiRequest, res: NextApiResponse) => {
+    try {
+      const { linkID, voteTarget } = await req.body;
+      await pollRepository.updatePoll(linkID, voteTarget);
+      return res.json({ success: true });
+    } catch (error) {
+      console.error(error);
+      let errorResponse;
+      if (error instanceof Error) {
+        errorResponse = { error: error.message };
+      } else {
+        errorResponse = { error: "An unknown error occurred" };
+      }
+      return res.json({ success: false, ...errorResponse });
+    }
+  },
 };
 
 export default pollService;
