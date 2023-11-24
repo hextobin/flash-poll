@@ -14,6 +14,7 @@ This [demo](https://flash-poll-app-2n3gt.ondigitalocean.app) is a work in progre
 
   - [ ] Enhance mobile responsiveness
   - [ ] Cypress Testing
+  - [ ] Expired Poll Page
 
 - [ ] Poll Creation API
 

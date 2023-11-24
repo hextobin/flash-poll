@@ -5,6 +5,7 @@ import pollService from "../../services/pollService";
 import { useRouter } from "next/router";
 import { usePoll } from "../../hooks/usePoll";
 import { CompletePoll } from "../../types/pollTypes";
+import ErrorDisplay from "@/components/ErrorDisplay";
 
 const PollPage = () => {
   const [pollResults, setPollResults] = useState<
@@ -12,10 +13,8 @@ const PollPage = () => {
   >([]);
   const [pollData, setPollData] = useState<CompletePoll | null>(null);
   const router = useRouter();
-  const { setError } = usePoll();
+  const { setError, clearError, error } = usePoll();
   const linkID = router.query.index;
-
-  // TODO: show errors
 
   const parseAndSetPollData = (data: CompletePoll) => {
     const answersAndVotes = data.options.map((option) => {
@@ -90,6 +89,7 @@ const PollPage = () => {
           );
         })}
       </div>
+      {error && <ErrorDisplay error={error!} clearError={clearError} />}
     </>
   );
 };

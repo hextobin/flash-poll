@@ -15,14 +15,18 @@ const pollService = {
       const url = new URL("/api/poll", window.location.origin);
       url.searchParams.append("linkID", linkID);
       const response = await fetch(url.toString());
+      const resJSON = await response.json();
       if (!response.ok) {
         throw new Error("Failed to fetch poll");
+      } else if (resJSON["error"] === "Poll Expired") {
+        throw new Error("Poll Expired");
       }
-      const resJSON = await response.json();
       return resJSON;
     } catch (err) {
       if (err instanceof Error) {
-        console.error(err);
+        if (err.message === "Poll Expired") {
+          router.push("/pollExpired");
+        }
         setError(err.message);
       } else {
         console.error("An unknown error occurred");

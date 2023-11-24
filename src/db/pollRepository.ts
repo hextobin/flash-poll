@@ -23,6 +23,16 @@ const pollRepository = {
       include: { options: true },
     });
     if (!poll) throw new Error("Poll not found");
+    if (poll.duration) {
+      const pollExpiration = new Date(
+        poll.createdAt.getTime() + poll.duration * 1000 * 60
+      );
+      if (pollExpiration < new Date()) {
+        // TODO: should this be handled as an error--it's not really an error
+        // perhaps there's a cleaner way to handle this
+        throw new Error("Poll Expired");
+      }
+    }
     return poll;
   },
   updatePoll: async (linkID: string, voteTarget: string) => {
