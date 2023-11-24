@@ -10,6 +10,11 @@ This [demo](https://flash-poll-app-2n3gt.ondigitalocean.app) is a work in progre
 
 ## Features 🚀:
 
+- [ ] App Level
+
+  - [ ] Enhance mobile responsiveness
+  - [ ] Cypress Testing
+
 - [ ] Poll Creation API
 
   - [x] Validation
@@ -28,23 +33,26 @@ This [demo](https://flash-poll-app-2n3gt.ondigitalocean.app) is a work in progre
   - [x] Custom Duration
   - [x] Submit
   - [x] Clear Form
-  - [ ] Display errors if returned from API
-  - [ ] Redirect to poll link upon poll creation
-  - [ ] Unit tests
+  - [x] Display errors if returned from API
+  - [x] Redirect to poll link upon poll creation
+  - [x] Unit tests
 
 - [ ] Poll Voting Page
 
-  - [ ] Display question
-  - [ ] Display answers
-  - [ ] Display vote count on answers
+  - [x] Display question
+  - [x] Display answers
+  - [x] Display vote count on answers
+  - [x] Unit tests
+  - [ ] Add poll deletion button (if current user created it)
   - [ ] Display remaining voting time (duration)
+  - [ ] Redirect to expired poll page if duration exceeded
+  - [ ] Prevent multiple votes if same user
   - [ ] Web Sockets?
-  - [ ] Unit tests
 
 - [ ] Poll Voting API
 
-  - [ ] Voting request validation
-  - [ ] DB update resource
+  - [x] Voting request validation
+  - [x] DB update resource
   - [ ] Error logging
   - [ ] Web Sockets?
   - [ ] Unit tests

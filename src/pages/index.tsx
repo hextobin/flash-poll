@@ -4,7 +4,7 @@ import { PollQuestion } from "../components/pollCreation/PollQuestion";
 import { AnswerInput } from "../components/pollCreation/AnswerInput";
 import { DurationInput } from "../components/pollCreation/DurationInput";
 import { usePollCreationForm } from "../hooks/usePollCreationForm";
-import ErrorDisplay from "../components/pollCreation/ErrorDisplay";
+import ErrorDisplay from "../components/ErrorDisplay";
 import pollService from "@/services/pollService";
 
 const PollCreationForm = () => {
