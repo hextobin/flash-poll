@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import pollService from "../../services/pollService";
 import { useRouter } from "next/router";
 import { usePoll } from "../../hooks/usePoll";
@@ -7,33 +7,24 @@ import ErrorDisplay from "@/components/ErrorDisplay";
 import PollDisplay from "../../components/pollView/PollDisplay";
 
 const PollPage = () => {
-  const [pollResults, setPollResults] = useState<
-    { content: string; votes: number }[]
-  >([]);
   const [pollData, setPollData] = useState<CompletePoll | null>(null);
   const router = useRouter();
   const { setError, clearError, error } = usePoll();
   const linkID = router.query.index;
 
-  const parseAndSetPollData = (data: CompletePoll) => {
-    const answersAndVotes = data.options.map((option) => {
-      return { content: option.answer, votes: option.votes };
-    });
-    answersAndVotes.sort((a, b) => {
-      const nameA = a.content.toUpperCase();
-      const nameB = b.content.toUpperCase();
-      if (nameA < nameB) {
-        return -1;
-      }
-      if (nameA > nameB) {
-        return 1;
-      }
-      // names must be equal
-      return 0;
-    });
-    setPollResults(answersAndVotes);
-    setPollData(data);
-  };
+  const pollResults = useMemo(() => {
+    if (!pollData) return [];
+    return pollData.options
+      .map((option) => ({
+        content: option.answer,
+        votes: option.votes,
+      }))
+      .sort((a, b) => {
+        const nameA = a.content.toUpperCase();
+        const nameB = b.content.toUpperCase();
+        return nameA.localeCompare(nameB);
+      });
+  }, [pollData]);
 
   const getPoll = async () => {
     if (typeof linkID === "string") {
@@ -42,7 +33,7 @@ const PollPage = () => {
         setError
       );
       if (data) {
-        parseAndSetPollData(data);
+        setPollData(data);
       }
     }
   };

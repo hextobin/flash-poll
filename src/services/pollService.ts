@@ -20,6 +20,8 @@ const pollService = {
         throw new Error("Failed to fetch poll");
       } else if (resJSON["error"] === "Poll Expired") {
         throw new Error("Poll Expired");
+      } else {
+        throw new Error(`${resJSON.error}`);
       }
       return resJSON;
     } catch (err) {
