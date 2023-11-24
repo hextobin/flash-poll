@@ -17,11 +17,10 @@ const pollService = {
       const response = await fetch(url.toString());
       const resJSON = await response.json();
       if (!response.ok) {
-        throw new Error("Failed to fetch poll");
-      } else if (resJSON["error"] === "Poll Expired") {
-        throw new Error("Poll Expired");
-      } else {
         throw new Error(`${resJSON.error}`);
+      }
+      if (resJSON["error"] === "Poll Expired") {
+        throw new Error("Poll Expired");
       }
       return resJSON;
     } catch (err) {
