@@ -26,8 +26,9 @@ const pollService = {
       if (err instanceof Error) {
         if (err.message === "Poll Expired") {
           router.push("/pollExpired");
+        } else {
+          setError(err.message);
         }
-        setError(err.message);
       } else {
         console.error("An unknown error occurred");
         setError("An unknown error occurred");
