@@ -11,16 +11,16 @@ interface PollDisplayProps {
 
 const PollDisplay = ({ pollData, pollResults, putPoll }: PollDisplayProps) => (
   <>
-    <div
-      className="m-auto mt-5 flex w-fit alert question-alert"
-      data-testid="question"
-    >
-      <span className="text-white text-2xl m-auto">{pollData?.question}</span>
+    <div className="alert question-alert overflow-hidden mx-5 mt-20 max-w-[calc(100%-2rem)]">
+      <span className="text-white break-all text-4xl m-auto">
+        {pollData?.question}
+      </span>
     </div>
-    <div className="p-5 mt-20 mb-20 ml-5 mr-5 shadow-xl bg-white flex justify-around ">
+
+    <div className="p-5 mt-20 mb-20 ml-5 mr-5 shadow-xl bg-white flex flex-wrap justify-around ">
       {pollResults.map((obj) => {
         return (
-          <div className="flex flex-col items-center" key={obj.content}>
+          <div className="flex flex-col m-5 items-center" key={obj.content}>
             <span className="countdown font-mono text-9xl">
               <span
                 className="border"
@@ -29,7 +29,7 @@ const PollDisplay = ({ pollData, pollResults, putPoll }: PollDisplayProps) => (
               ></span>
             </span>
             <div
-              className="alert mt-4 flex items-center justify-center border-black cursor-pointer"
+              className="vote-button alert mt-4 flex items-center justify-center border-black cursor-pointer"
               onClick={() => putPoll(obj.content)}
             >
               <span className="font-bold" data-testid="poll-answer">

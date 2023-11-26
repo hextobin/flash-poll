@@ -14,8 +14,12 @@ body {
   }
 
 .question-alert {
-	background-color: #54ac98;
+	background-color: #5454ac;
 	border-style: none;
+}
+
+.vote-button {
+	background-color: rgb(255 216 145);;
 }
   
   
