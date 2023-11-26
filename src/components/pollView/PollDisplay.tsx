@@ -11,7 +11,10 @@ interface PollDisplayProps {
 
 const PollDisplay = ({ pollData, pollResults, putPoll }: PollDisplayProps) => (
   <>
-    <div className="alert question-alert overflow-hidden mx-5 mt-20 max-w-[calc(100%-2rem)]">
+    <div
+      data-testid="question"
+      className="alert question-alert overflow-hidden mx-5 mt-20 max-w-[calc(100%-2rem)]"
+    >
       <span className="text-white break-all text-4xl m-auto">
         {pollData?.question}
       </span>
