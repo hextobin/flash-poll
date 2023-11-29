@@ -7,7 +7,7 @@ describe("usePollCreationForm", () => {
 
     expect(result.current.question).toBe("");
     expect(result.current.answers.length).toBe(2);
-    expect(result.current.duration).toBe(1);
+    expect(result.current.duration).toBe(null);
     expect(result.current.questionCharCount).toBe(0);
   });
 

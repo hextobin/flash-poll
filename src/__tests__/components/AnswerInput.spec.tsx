@@ -18,7 +18,7 @@ describe("AnswerInput Component", () => {
       />
     );
 
-    const input = screen.getByPlaceholderText("Answer 1");
+    const input = screen.getByPlaceholderText("Yellow");
     fireEvent.change(input, { target: { value: "Updated Answer" } });
 
     expect(mockHandleAnswerChange).toHaveBeenCalledWith("1", expect.anything());

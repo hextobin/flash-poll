@@ -14,7 +14,7 @@ export const PollQuestion = ({
       id="question"
       value={question}
       onChange={handleQuestionChange}
-      className="input input-bordered pt-2 w-full "
+      className="input input-bordered pt-2 w-full h-16"
       placeholder="What Color Should We Paint The Lobby?"
       required
     />
