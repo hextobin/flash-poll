@@ -14,7 +14,8 @@ export const PollQuestion = ({
       id="question"
       value={question}
       onChange={handleQuestionChange}
-      className="input input-bordered w-full "
+      className="input input-bordered pt-2 w-full "
+      placeholder="What Color Should We Paint The Lobby?"
       required
     />
     <span className="text-sm mt-1">{charCount}/250</span>

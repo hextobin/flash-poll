@@ -8,7 +8,7 @@ export const usePollCreationForm = () => {
     { id: "1", text: "" },
     { id: "2", text: "" },
   ]);
-  const [duration, setDuration] = useState<number | null>(1);
+  const [duration, setDuration] = useState<number | null>(null);
   const [questionCharCount, setQuestionCharCount] = useState(0);
   const [error, setError] = useState<string | null>(null);
 

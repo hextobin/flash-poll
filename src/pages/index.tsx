@@ -53,6 +53,9 @@ const PollCreationForm = () => {
             charCount={questionCharCount}
             handleQuestionChange={handleQuestionChange}
           />
+          <label className="label" htmlFor="question">
+            <span className="label-text">Answers:</span>
+          </label>
           {answers.map((answer, index) => (
             <AnswerInput
               key={answer.id}
@@ -65,7 +68,7 @@ const PollCreationForm = () => {
           <button
             type="button"
             onClick={addAnswer}
-            className="btn w-full text-white  btn-info mt-2 "
+            className="btn w-full text-white  btn-accent mt-2 "
           >
             Add Answer
           </button>
@@ -73,7 +76,6 @@ const PollCreationForm = () => {
             duration={duration}
             handleDurationChange={handleDurationChange}
           />
-
           <div className="flex space-x-2 mt-4">
             <button type="submit" className="btn btn-accent text-white ">
               Submit

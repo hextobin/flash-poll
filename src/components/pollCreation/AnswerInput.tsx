@@ -13,6 +13,8 @@ type AnswerInputProps = {
   removeAnswer: (id: string) => void;
 };
 
+const placeHolderAnswers = ["Yellow", "Blue"];
+
 export const AnswerInput = ({
   answer,
   index,
@@ -26,7 +28,7 @@ export const AnswerInput = ({
         id={`answer-${answer.id}`}
         value={answer.text}
         onChange={(e) => handleAnswerChange(answer.id, e)}
-        placeholder={`Answer ${index + 1}`}
+        placeholder={placeHolderAnswers[index]}
         className="input input-bordered"
         required={index < 2}
       />
