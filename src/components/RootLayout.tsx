@@ -7,7 +7,7 @@ export default function RootLayout({
     <>
       <div className="navbar bg-base-100">
         <a
-          className="btn btn-ghost border-4 btn-outline normal-case font-black text-4xl"
+          className="btn btn-ghost shadow-2xl border-4 btn-outline normal-case font-bold text-4xl"
           href="/"
         >
           FlashPoll
