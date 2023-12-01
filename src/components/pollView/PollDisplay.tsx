@@ -11,34 +11,33 @@ interface PollDisplayProps {
 
 const PollDisplay = ({ pollData, pollResults, putPoll }: PollDisplayProps) => (
   <>
-    <div
+    <h2
       data-testid="question"
-      className="alert question-alert overflow-hidden mx-5 mt-20 max-w-[calc(100%-2rem)]"
+      className="font-bold md:font-black mt-10 text-center text-4xl md:text-8xl "
     >
-      <span className="text-white break-all text-4xl m-auto">
-        {pollData?.question}
-      </span>
+      {pollData?.question}
+    </h2>
+    <div className="text-center ping text-4xl font-bold mt-10 p-8 m-auto shadow-xl bg-slate-100 max-w-xs">
+      Vote Below!
     </div>
-
-    <div className="p-5 mt-20 mb-20 ml-5 mr-5 shadow-xl bg-white flex flex-wrap justify-around ">
+    <div className="p-5 mt-10 mb-20 ml-5 mr-5 shadow-xl bg-white flex flex-wrap justify-around ">
       {pollResults.map((obj) => {
         return (
           <div className="flex flex-col m-5 items-center" key={obj.content}>
-            <span className="countdown font-mono text-9xl">
+            <span className="countdown border border-black border-4 rounded-xl font-mono text-9xl">
               <span
-                className="border"
                 data-testid="poll-vote-count"
                 style={{ "--value": obj.votes }}
               ></span>
             </span>
-            <div
-              className="vote-button alert mt-4 flex items-center justify-center border-black cursor-pointer"
+            <button
+              className="btn btn-accent shadow-xl ping min-w-full mt-4 flex items-center justify-center cursor-pointer"
               onClick={() => putPoll(obj.content)}
             >
               <span className="font-bold" data-testid="poll-answer">
                 {obj.content}
               </span>
-            </div>
+            </button>
           </div>
         );
       })}

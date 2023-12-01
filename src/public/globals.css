@@ -2,24 +2,25 @@
 @tailwind components;
 @tailwind utilities;
 
+@keyframes ping {
+	75%, 100% {
+	  transform: scale(.9);
+	  opacity: 1;
+	}
+  }
 
 html {
 	background: linear-gradient(215deg, rgb(153, 173, 255) 0%, rgb(221, 149, 255) 70%);
 	background-attachment: fixed;
-  }
-  
+}
+
 body {
 	margin: 0;
-	min-height: 100vh; 
-  }
-
-.question-alert {
-	background-color: #5454ac;
-	border-style: none;
+	min-height: 100vh;
 }
 
-.vote-button {
-	background-color: rgb(255 216 145);;
+.ping {
+	animation: ping 1s cubic-bezier(0, 0, 0.2, 1) 1;
 }
-  
-  
+
+;
