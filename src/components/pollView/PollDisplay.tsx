@@ -18,13 +18,13 @@ const PollDisplay = ({
 }: PollDisplayProps) => {
   const displayVotingButtons = (obj: { content: string; votes: number }) => {
     return isVotingDisabled ? (
-      <></>
+      <div className="font-black text-4xl">{obj.content}</div>
     ) : (
       <button
         className="btn btn-accent shadow-xl ping min-w-full mt-4 flex items-center justify-center cursor-pointer"
         onClick={() => putPoll(obj.content)}
       >
-        <span className="font-bold" data-testid="poll-answer">
+        <span className="font-black text-xl" data-testid="poll-answer">
           {obj.content}
         </span>
       </button>
@@ -35,7 +35,7 @@ const PollDisplay = ({
     return isVotingDisabled ? (
       <></>
     ) : (
-      <div className="text-center ping text-4xl font-bold mt-10 p-8 m-auto shadow-xl bg-slate-100 max-w-xs">
+      <div className="text-center ping text-4xl font-black mt-10 p-8 m-auto shadow-xl bg-slate-100 max-w-xs">
         Vote Below!
       </div>
     );
@@ -44,7 +44,7 @@ const PollDisplay = ({
     <>
       <h2
         data-testid="question"
-        className="font-bold md:font-black mt-10 text-center text-4xl md:text-8xl "
+        className="font-black mt-10 text-center text-3xl md:text-8xl "
       >
         {pollData?.question}
       </h2>

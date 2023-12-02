@@ -5,6 +5,7 @@ import { PostPoll, CreatePollData } from "../types/pollTypes";
 import pollRepository from "../db/pollRepository";
 import router from "next/router";
 import { CompletePoll } from "../types/pollTypes";
+import { Dispatch, SetStateAction } from "react";
 
 const pollService = {
   getPoll: async (
@@ -113,7 +114,8 @@ const pollService = {
   putPoll: async (
     linkID: string,
     voteTarget: string,
-    setError: React.Dispatch<React.SetStateAction<string | null>>
+    setError: React.Dispatch<React.SetStateAction<string | null>>,
+    setIsVotingDisabled: Dispatch<SetStateAction<boolean>>
   ) => {
     try {
       const response = await fetch("/api/poll", {
@@ -129,8 +131,7 @@ const pollService = {
       }
 
       localStorage.setItem(`poll-${linkID}`, linkID);
-
-      router.reload();
+      setIsVotingDisabled(true);
     } catch (err) {
       if (err instanceof Error) {
         console.error(err);

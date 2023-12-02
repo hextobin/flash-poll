@@ -41,7 +41,13 @@ const PollPage = () => {
 
   const putPoll = async (voteTarget: string) => {
     if (typeof linkID === "string") {
-      await pollService.putPoll(linkID, voteTarget, setError);
+      await pollService.putPoll(
+        linkID,
+        voteTarget,
+        setError,
+        setIsVotingDisabled
+      );
+      await getPoll();
     }
   };
 
