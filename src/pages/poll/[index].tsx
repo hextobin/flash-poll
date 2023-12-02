@@ -11,6 +11,7 @@ const PollPage = () => {
   const router = useRouter();
   const { setError, clearError, error } = usePoll();
   const linkID = router.query.index;
+  const [isVotingDisabled, setIsVotingDisabled] = useState<boolean>(false);
 
   const pollResults = useMemo(() => {
     if (!pollData) return [];
@@ -46,6 +47,7 @@ const PollPage = () => {
 
   useEffect(() => {
     getPoll();
+    setIsVotingDisabled(localStorage.getItem(`poll-${linkID}`) === linkID);
   }, [linkID]);
 
   return (
@@ -55,6 +57,7 @@ const PollPage = () => {
           pollData={pollData}
           pollResults={pollResults}
           putPoll={putPoll}
+          isVotingDisabled={isVotingDisabled}
         ></PollDisplay>
       )}
       {error && <ErrorDisplay error={error!} clearError={clearError} />}

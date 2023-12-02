@@ -127,6 +127,9 @@ const pollService = {
       if (!response.ok) {
         throw new Error("Failed to submit vote");
       }
+
+      localStorage.setItem(`poll-${linkID}`, linkID);
+
       router.reload();
     } catch (err) {
       if (err instanceof Error) {
