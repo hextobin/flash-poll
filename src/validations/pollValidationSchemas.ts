@@ -19,7 +19,7 @@ export const postPollSchema = yup.object({
   duration: yup
     .number()
     .integer("Duration must be an integer")
-    .min(1, "The minimum duration for a poll is 1 minute")
-    .max(60, "The maximum duration for a poll is 60 minutes")
+    .min(60000, "The minimum duration for a poll is 1 minute")
+    .max(3600000, "The maximum duration for a poll is 60 minutes")
     .required("A duration must be specified"),
 });

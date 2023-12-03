@@ -29,10 +29,7 @@ const PollPage = () => {
 
   const getPoll = async () => {
     if (typeof linkID === "string") {
-      const data: CompletePoll | null = await pollService.getPoll(
-        linkID,
-        setError
-      );
+      const data = await pollService.getPoll(linkID, setError);
       if (data) {
         setPollData(data);
       }
@@ -64,7 +61,7 @@ const PollPage = () => {
           pollResults={pollResults}
           putPoll={putPoll}
           isVotingDisabled={isVotingDisabled}
-        ></PollDisplay>
+        />
       )}
       {error && <ErrorDisplay error={error!} clearError={clearError} />}
     </>

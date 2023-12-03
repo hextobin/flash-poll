@@ -62,6 +62,9 @@ const pollService = {
     },
     setError: React.Dispatch<React.SetStateAction<string | null>>
   ) => {
+    if (poll.duration) {
+      poll.duration = poll.duration * 1000 * 60;
+    }
     try {
       const response = await fetch("/api/poll", {
         method: "POST",
