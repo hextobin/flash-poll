@@ -58,7 +58,7 @@ const PollDisplay = ({
 
   const displayVotingButtons = (obj: { content: string; votes: number }) => {
     return isVotingDisabled ? (
-      <div className="font-black text-4xl">{obj.content}</div>
+      <div className="font-black text-4xl mt-6">{obj.content}</div>
     ) : (
       <button
         className="btn btn-accent shadow-xl ping min-w-full mt-4 flex items-center justify-center cursor-pointer"
@@ -127,7 +127,7 @@ const PollDisplay = ({
 
   const displayInstructionsAndCountdown = () => {
     return (
-      <div className="text-center ping text-4xl font-black p-8  shadow-xl bg-slate-100 rounded-lg border mb-5 mt-5 max-w-xs">
+      <div className="text-center ping text-4xl font-black p-8  shadow-xl bg-slate-100 rounded-lg border mb-5 mt-5 w-80 max-w-xs">
         {displayCountdown()}
         {isVotingDisabled ? (
           <div className="mt-5">You've Voted!</div>
